@@ -4,31 +4,47 @@ class Node{
 	Node(int data){this.data=data;}
 }
 class Demo{
-	public static void main(String args[]){
-		Node n1=new Node(100);
-		n1.next=new Node(200);
-		n1.next.next=new Node(300);
-		n1.next.next.next=new Node(400);
-		n1.next.next.next.next=new Node(500);
-		
-		//prints data- [100, 200, 300, 400, 500] using a while loop
-		
+	public static void printData(Node node){
 		System.out.print("[");
-		Node temp=n1;
-		while (temp!= null){
-			System.out.print(temp.data+",");
-			temp=temp.next;
+		while(node!=null){
+			System.out.print(node.data+", ");
+			node=node.next;
 		}
-		System.out.print("\b]");
+		System.out.println("\b\b]");
+	}
+	public static void main(String args[]){
+		Node top=null;
 		
-		// second loop
-		temp=n1;
-		System.out.print("\n\n[");
-		while (temp!= null){
-			System.out.print(temp.data+",");
-			temp=temp.next;
+		Node n1=new Node(100);
+		n1.next=top;
+		top=n1;
+		printData(top); //[100]
+		
+		n1=new Node(200);
+		n1.next=top;
+		top=n1;
+		printData(top); //[200,100]
+		
+		n1=new Node(300);
+		n1.next=top;
+		top=n1;
+		printData(top); //[300,200,100]
+		
+		n1=new Node(400);
+		n1.next=top;
+		top=n1;
+		printData(top); //[400,300,200,100]
+
+		n1=new Node(500);
+		n1.next=top;
+		top=n1;
+		printData(top); //[500,400,300,200,100]
+		
+		//Insert codes here to remove the first(top) element 
+		if (top!=null){
+			top=top.next;
 		}
-		System.out.print("\b]");
 		
+		printData(top); //[400,300,200,100]
 	}
 }
