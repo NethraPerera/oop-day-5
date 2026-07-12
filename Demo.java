@@ -1,12 +1,26 @@
+class Marks{
+	int prfMarks;
+	int dbmsMarks;
+	Marks(int prfMarks, int dbmsMarks){
+		this.prfMarks=prfMarks;
+		this.dbmsMarks=dbmsMarks;
+	} 
+}
 class Student{
 	String id;
 	String name;
-	int prfMarks;
-	int dbmsMarks;
+	Marks studentMarks;
+	
+	Student(){
+		//
+	}
+	Student(String id, String name){
+		this.id=id;
+		this.name=name;
+	} 
 }
 class Demo{
 	public static void main(String args[]){
-		Student s1;
-		s1=new Student();	
+		Student s1=new Student("S0001","Nimal");	
 	}
 }
