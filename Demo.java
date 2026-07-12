@@ -1,3 +1,17 @@
+class Arrays{
+	
+	Arrays(){}
+	
+	public static String toString(int ar[]){
+		String array="[";
+		for (int i = 0; i < ar.length; i++){
+			array+=ar[i]+",";
+		}
+		array+="\b]";
+		return array;
+	}
+}
+
 class Node{
 	int data;
 	Node next;
@@ -40,6 +54,29 @@ class Stack{
 	public void clear(){
 		top=null;
 	}
+	public int search(int data){
+		int index=0;
+		Node temp=top;
+		while (	temp!=null){
+			if (temp.data==data)
+			{
+				return index;
+			}else{
+				index++;
+				temp=temp.next;
+			}
+		}
+		return -1;
+	}
+	public int[] toArray(){
+		int [] ar=new int[size()];
+		Node temp=top;
+		for (int i = 0; i < ar.length; i++){
+			ar[i]=temp.data;
+			temp=temp.next;
+		}
+		return ar;
+	}
 }
 class Demo{
 	public static void main(String args[]){
@@ -56,9 +93,13 @@ class Demo{
 		System.out.println("Size of the stack : "+s1.size()); //5
 		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//false
 		
-		s1.clear();
-		s1.printStack();//[empty]
-		System.out.println("Size of the stack : "+s1.size()); //0
-		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//true
+		System.out.println("Index of 200 : "+s1.search(200)); //3
+		
+		System.out.println("Index of 600 : "+s1.search(600)); //-1
+
+		
+		int[] dataArray=s1.toArray();
+		System.out.println(Arrays.toString(dataArray));//[500, 400, 300, 200, 100]
+
 	}
 }
