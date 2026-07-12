@@ -8,6 +8,6 @@ class Demo{
 		Node n1=new Node(100);
 		n1.next=new Node(200);
 		n1.next.next=new Node(300);
+		n1.next.next.next=n1;
 	}
 }
-
