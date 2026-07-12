@@ -12,7 +12,6 @@ class Student{
 	Marks studentMarks;
 	
 	Student(){
-		//
 	}
 	Student(String id, String name){
 		this.id=id;
@@ -22,5 +21,6 @@ class Student{
 class Demo{
 	public static void main(String args[]){
 		Student s1=new Student("S0001","Nimal");	
+		s1.studentMarks=new Marks(67,78);
 	}
 }
