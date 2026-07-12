@@ -6,40 +6,59 @@ class Node{
 class Stack{
 	private Node top;
 	public void push(int data){
-		if (top==null){
-			top=new Node(data);
-		}else{
-			Node temp=new Node(data);
-			temp.next=top;
-			top=temp;
-		}	
+		Node n1=new Node(data);
+		n1.next=top;
+		top=n1;
+		
 	}
 	public void pop(){
-		if (top!=null){
+		if(top!=null){
 			top=top.next;
-		}	
+		}
 	}
 	public void printStack(){
 		System.out.print("[");
 		Node temp=top;
 		while(temp!=null){
-			System.out.print(temp.data+",");
+			System.out.print(temp.data+", ");
 			temp=temp.next;
 		}
-		System.out.print("\b]\n\n");
+		System.out.println(top==null? "Empty]":"\b\b]");
+	}
+	public int size(){
+		int count=0;
+		Node temp=top;
+		while(temp!=null){
+			count++;
+			temp=temp.next;
+		}
+		return count;
+	} 
+	public boolean isEmpty(){
+		return top==null;
+	}
+	public void clear(){
+		top=null;
 	}
 }
 class Demo{
 	public static void main(String args[]){
 		Stack s1=new Stack();
+		s1.printStack();//[empty]
+		System.out.println("Size of the stack : "+s1.size()); //0
+		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//true
 		s1.push(100);
 		s1.push(200);
 		s1.push(300);
 		s1.push(400);
 		s1.push(500);
 		s1.printStack(); //[500, 400, 300, 200, 100]
+		System.out.println("Size of the stack : "+s1.size()); //5
+		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//false
 		
-		s1.pop();
-		s1.printStack(); //[400, 300, 200, 100]
+		s1.clear();
+		s1.printStack();//[empty]
+		System.out.println("Size of the stack : "+s1.size()); //0
+		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//true
 	}
 }
