@@ -1,26 +1,13 @@
-class Marks{
-	int prfMarks;
-	int dbmsMarks;
-	Marks(int prfMarks, int dbmsMarks){
-		this.prfMarks=prfMarks;
-		this.dbmsMarks=dbmsMarks;
-	} 
-}
-class Student{
-	String id;
-	String name;
-	Marks studentMarks;
-	
-	Student(){
-	}
-	Student(String id, String name){
-		this.id=id;
-		this.name=name;
-	} 
+class Node{
+	int data;
+	Node next;
+	Node(int data){this.data=data;}
 }
 class Demo{
 	public static void main(String args[]){
-		Student s1=new Student("S0001","Nimal");	
-		s1.studentMarks=new Marks(67,78);
+		Node n1=new Node(100);
+		n1.next=new Node(200);
+		n1.next.next=new Node(300);
 	}
 }
+
