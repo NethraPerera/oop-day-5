@@ -1,105 +1,86 @@
-class Arrays{
-	
-	Arrays(){}
-	
-	public static String toString(int ar[]){
-		String array="[";
-		for (int i = 0; i < ar.length; i++){
-			array+=ar[i]+",";
-		}
-		array+="\b]";
-		return array;
-	}
-}
-
+import java.util.*;
 class Node{
 	int data;
 	Node next;
 	Node(int data){this.data=data;}
 }
-class Stack{
-	private Node top;
-	public void push(int data){
+class Queue{
+	private Node front;
+	public void add(int data){
 		Node n1=new Node(data);
-		n1.next=top;
-		top=n1;
-		
-	}
-	public void pop(){
-		if(top!=null){
-			top=top.next;
+		if (isEmpty()){
+			front=n1;
+		}else{
+			Node LastNode=front;
+			while (LastNode.next != null){
+				LastNode=LastNode.next;
+			}
+			LastNode.next=n1;
 		}
 	}
-	public void printStack(){
+	public void remove(){
+		if(front!=null){
+			front=front.next;
+		}
+	}
+	public void printQueue(){
 		System.out.print("[");
-		Node temp=top;
+		Node temp=front;
 		while(temp!=null){
 			System.out.print(temp.data+", ");
 			temp=temp.next;
 		}
-		System.out.println(top==null? "Empty]":"\b\b]");
+		System.out.println(isEmpty() ?"empty]":"\b\b]");
 	}
+
 	public int size(){
+		Node temp=front;
 		int count=0;
-		Node temp=top;
 		while(temp!=null){
 			count++;
 			temp=temp.next;
 		}
 		return count;
-	} 
+	}
 	public boolean isEmpty(){
-		return top==null;
+		return front==null;
 	}
 	public void clear(){
-		top=null;
+		front=null;
 	}
 	public int search(int data){
+		Node temp=front;
 		int index=0;
-		Node temp=top;
-		while (	temp!=null){
-			if (temp.data==data)
-			{
+		while(temp!=null){
+			if(temp.data==data){
 				return index;
-			}else{
-				index++;
-				temp=temp.next;
 			}
+			index++;
+			temp=temp.next;
 		}
 		return -1;
 	}
 	public int[] toArray(){
-		int [] ar=new int[size()];
-		Node temp=top;
-		for (int i = 0; i < ar.length; i++){
-			ar[i]=temp.data;
+		int[] tempDataArray=new int[size()];
+		Node temp=front;
+		for (int i = 0; i < tempDataArray.length; i++)	{
+			tempDataArray[i]=temp.data;
 			temp=temp.next;
 		}
-		return ar;
+		return tempDataArray;
 	}
 }
 class Demo{
 	public static void main(String args[]){
-		Stack s1=new Stack();
-		s1.printStack();//[empty]
-		System.out.println("Size of the stack : "+s1.size()); //0
-		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//true
-		s1.push(100);
-		s1.push(200);
-		s1.push(300);
-		s1.push(400);
-		s1.push(500);
-		s1.printStack(); //[500, 400, 300, 200, 100]
-		System.out.println("Size of the stack : "+s1.size()); //5
-		System.out.println("Stack is empty    : "+s1.isEmpty()+"\n");//false
+		Queue q1=new Queue();
+		q1.add(100);
+		q1.add(200);
+		q1.add(300);
+		q1.add(400);
+		q1.add(500);
+		q1.printQueue();//[100, 200, 300, 400, 500]
 		
-		System.out.println("Index of 200 : "+s1.search(200)); //3
-		
-		System.out.println("Index of 600 : "+s1.search(600)); //-1
-
-		
-		int[] dataArray=s1.toArray();
-		System.out.println(Arrays.toString(dataArray));//[500, 400, 300, 200, 100]
-
+		q1.remove();
+		q1.printQueue();//[200, 300, 400, 500]
 	}
 }
