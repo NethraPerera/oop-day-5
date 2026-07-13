@@ -4,37 +4,57 @@ class Node{
 	Node next;
 	Node(int data){this.data=data;}
 }
-class Queue{
-	private Node front;
-	public void add(int data){
+class List{
+	private Node first;
+
+	public void add(int data){ //Insertion order
+		addLast(data); //add(size(),data)
+	}
+
+
+
+
+
+	public void add(int index, int data){
 		Node n1=new Node(data);
-		if (isEmpty()){
-			front=n1;
+		if(index==0){
+			n1.next=first;
+			first=n1;
 		}else{
-			Node LastNode=front;
-			while (LastNode.next != null){
-				LastNode=LastNode.next;
+			int count=0;
+			Node temp=first;
+			while(count<index-1){
+				count++;
+				temp=temp.next;
 			}
-			LastNode.next=n1;
+			n1.next=temp.next;
+			temp.next=n1;
 		}
 	}
-	public void remove(){
-		if(front!=null){
-			front=front.next;
-		}
+	public void addLast(int data){
+		add(size(),data);
 	}
-	public void printQueue(){
+	public void addFirst(int data){
+		add(0,data);		
+	}
+	public void remove(int index){
+		//	
+	}
+	public int get(int index){
+		//
+		return -1;
+	}
+	public void printList(){
 		System.out.print("[");
-		Node temp=front;
+		Node temp=first;
 		while(temp!=null){
 			System.out.print(temp.data+", ");
 			temp=temp.next;
 		}
 		System.out.println(isEmpty() ?"empty]":"\b\b]");
 	}
-
 	public int size(){
-		Node temp=front;
+		Node temp=first;
 		int count=0;
 		while(temp!=null){
 			count++;
@@ -43,13 +63,13 @@ class Queue{
 		return count;
 	}
 	public boolean isEmpty(){
-		return front==null;
+		return first==null;
 	}
 	public void clear(){
-		front=null;
+		first=null;
 	}
 	public int search(int data){
-		Node temp=front;
+		Node temp=first;
 		int index=0;
 		while(temp!=null){
 			if(temp.data==data){
@@ -62,7 +82,7 @@ class Queue{
 	}
 	public int[] toArray(){
 		int[] tempDataArray=new int[size()];
-		Node temp=front;
+		Node temp=first;
 		for (int i = 0; i < tempDataArray.length; i++)	{
 			tempDataArray[i]=temp.data;
 			temp=temp.next;
@@ -72,15 +92,19 @@ class Queue{
 }
 class Demo{
 	public static void main(String args[]){
-		Queue q1=new Queue();
-		q1.add(100);
-		q1.add(200);
-		q1.add(300);
-		q1.add(400);
-		q1.add(500);
-		q1.printQueue();//[100, 200, 300, 400, 500]
+		List intList=new List();
+		intList.add(100); //add(data)-->Insertion order[Queue]
+		intList.add(200);
+		intList.add(300);
+		intList.add(400);
+		intList.add(500);
+		intList.printList();//[100, 200, 300, 400, 500]
 		
-		q1.remove();
-		q1.printQueue();//[200, 300, 400, 500]
+		intList.add(2,250);
+		intList.printList();//[100, 200, 300, 400, 500]
+		
+		intList.addFirst(50);
+		intList.addLast(600);
+		intList.printList();//[50, 100, 200, 300, 400, 500, 600]
 	}
 }
