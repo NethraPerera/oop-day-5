@@ -10,26 +10,26 @@ class List{
 	public void add(int data){ //Insertion order
 		addLast(data); //add(size(),data)
 	}
-
-
-
-
-
 	public void add(int index, int data){
 		Node n1=new Node(data);
-		if(index==0){
+		if(index==0 && first==null){
+			//n1.next=first;
+			first=n1;
+		}
+		else if(index==0 && first!=null){
 			n1.next=first;
 			first=n1;
 		}else{
 			int count=0;
 			Node temp=first;
-			while(count<index-1){
+			while(count!=index-1){
 				count++;
 				temp=temp.next;
 			}
 			n1.next=temp.next;
 			temp.next=n1;
 		}
+		
 	}
 	public void addLast(int data){
 		add(size(),data);
@@ -38,7 +38,28 @@ class List{
 		add(0,data);		
 	}
 	public void remove(int index){
-		//	
+		if(!isEmpty() && index>=0 && index<size()){
+			if(index==0){
+				first=first.next;
+			}else{
+				int count=0;
+				Node temp=first;
+				while(count<index-1){
+					count++;
+					temp=temp.next;
+				}
+				temp.next=temp.next.next;
+			}
+		}
+		/*
+		else if (size()!=0 && index<size()){
+			int count=0;
+			Node temp=first;
+			while(count!=index-1){
+				temp=temp.next;
+			}
+			temp.next=temp.next.next;
+		}*/
 	}
 	public int get(int index){
 		//
@@ -93,6 +114,7 @@ class List{
 class Demo{
 	public static void main(String args[]){
 		List intList=new List();
+		intList.add(0,150); 
 		intList.add(100); //add(data)-->Insertion order[Queue]
 		intList.add(200);
 		intList.add(300);
@@ -106,5 +128,14 @@ class Demo{
 		intList.addFirst(50);
 		intList.addLast(600);
 		intList.printList();//[50, 100, 200, 300, 400, 500, 600]
+		intList.remove(0);
+		intList.printList();//[ 100, 200, 300, 400, 500, 600]
+		intList.remove(intList.size()-1);
+		intList.printList();//[ 100, 200, 300, 400, 500, 600]
+		intList.remove(3);
+		intList.printList();//[ 100, 200, 300, 400, 500, 600]
+		
 	}
 }
+
+
